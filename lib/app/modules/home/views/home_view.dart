@@ -36,47 +36,54 @@ class HomeView extends GetView<HomeController> {
               alignment: Alignment.center,
               color: MyColors.blueAccent,
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
+                margin: EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Get.width),
                   color: MyColors.lightBllueAccent,
                 ),
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: List.generate(
                     MyStrings.listAppbarTab.length,
                     (index) {
                       return Obx(
-                        () => Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              controller.appBarTab.value = index;
-                            },
-                            borderRadius: BorderRadius.circular(Get.width),
-                            child: Container(
-                              width: 120,
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(Get.width),
+                        () => InkWell(
+                          onTap: () {
+                            controller.appBarTab.value = index;
+                          },
+                          borderRadius: BorderRadius.circular(Get.width),
+                          child: Container(
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 8,
+                            ),
+                            width: controller
+                                    .textSize(
+                                      "Pengeluaran",
+                                      TextStyle(
+                                        fontFamily: MyFontFamily.Bold,
+                                        fontSize: MyStyles.H6,
+                                      ),
+                                    )
+                                    .width +
+                                20,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(Get.width),
+                              color: controller.appBarTab.value == index
+                                  ? MyColors.white
+                                  : Colors.transparent,
+                            ),
+                            child: Text(
+                              MyStrings.listAppbarTab[index],
+                              style: TextStyle(
+                                fontFamily: controller.appBarTab.value == index
+                                    ? MyFontFamily.Bold
+                                    : MyFontFamily.Regular,
+                                fontSize: MyStyles.H6,
                                 color: controller.appBarTab.value == index
-                                    ? MyColors.white
-                                    : Colors.transparent,
-                              ),
-                              child: Text(
-                                MyStrings.listAppbarTab[index],
-                                style: TextStyle(
-                                  fontFamily:
-                                      controller.appBarTab.value == index
-                                          ? MyFontFamily.Bold
-                                          : MyFontFamily.Regular,
-                                  fontSize: MyStyles.H6,
-                                  color: controller.appBarTab.value == index
-                                      ? MyColors.darkBlueAccent
-                                      : MyColors.white,
-                                ),
+                                    ? MyColors.darkBlueAccent
+                                    : MyColors.white,
                               ),
                             ),
                           ),
