@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/home_controller.dart';
+import '../screens/hpg_laporan_screen.dart';
+import '../screens/hpg_pemasukan_screen.dart';
+import '../screens/hpg_pengeluaran_screen.dart';
 
 class HomeView extends GetView<HomeController> {
   @override
@@ -65,7 +68,10 @@ class HomeView extends GetView<HomeController> {
                               child: Text(
                                 MyStrings.listAppbarTab[index],
                                 style: TextStyle(
-                                  fontFamily: MyFontFamily.Bold,
+                                  fontFamily:
+                                      controller.appBarTab.value == index
+                                          ? MyFontFamily.Bold
+                                          : MyFontFamily.Regular,
                                   fontSize: MyStyles.H6,
                                   color: controller.appBarTab.value == index
                                       ? MyColors.darkBlueAccent
@@ -81,11 +87,48 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
             ),
-            SingleChildScrollView(
-              child: Column(
-                children: [],
+            Obx(
+              () => Expanded(
+                child: SingleChildScrollView(
+                  child: Container(
+                    child: controller.appBarTab.value == 0
+                        ? HPGPengeluaranScreen()
+                        : controller.appBarTab.value == 1
+                            ? HPGPemasukanScreen()
+                            : controller.appBarTab.value == 2
+                                ? HPGLaporanScreen()
+                                : HPGPengeluaranScreen(),
+                  ),
+                ),
               ),
-            )
+            ),
+            Container(
+              height: Get.height * 0.13,
+              width: Get.width,
+              padding: EdgeInsets.all(15),
+              color: MyColors.whiteGrey,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<OutlinedBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    MyColors.darkBlueAccent,
+                  ),
+                ),
+                child: Text(
+                  "Buat Catatan Baru",
+                  style: TextStyle(
+                    fontFamily: MyFontFamily.Bold,
+                    fontSize: MyStyles.H5,
+                    color: MyColors.white,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
