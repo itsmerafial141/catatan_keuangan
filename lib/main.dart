@@ -10,16 +10,17 @@ void main() {
   runApp(
     AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
-        statusBarColor: MyColors.blueAccent, //set as per your  status bar color
-        systemNavigationBarColor:
-            MyColors.dark, //set as per your navigation bar color
+        statusBarColor: Colors.blueAccent, //set as per your  status bar color
+        statusBarBrightness: Brightness.light,
         statusBarIconBrightness:
             Brightness.light, //set as per your status bar icons' color
-        systemNavigationBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor:
+            MyColors.black, //set as per your navigation bar color
+        systemNavigationBarIconBrightness: Brightness.light,
       ),
       child: GetMaterialApp(
-        title: "Application",
-        initialRoute: AppPages.INITIAL,
+        title: "Catatan Keuangan",
+        initialRoute: AppPages.INITIAL_H,
         getPages: AppPages.routes,
         debugShowCheckedModeBanner: false,
       ),

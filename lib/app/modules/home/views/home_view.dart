@@ -1,3 +1,4 @@
+import 'package:catatan_keuangan/app/routes/app_pages.dart';
 import 'package:catatan_keuangan/app/values/colors.dart';
 import 'package:catatan_keuangan/app/values/strings.dart';
 import 'package:catatan_keuangan/app/values/styles.dart';
@@ -9,6 +10,7 @@ import '../controllers/home_controller.dart';
 import '../screens/hpg_laporan_screen.dart';
 import '../screens/hpg_pemasukan_screen.dart';
 import '../screens/hpg_pengeluaran_screen.dart';
+import '../widgets/hpg_button_pengeluaran_widget.dart';
 
 class HomeView extends GetView<HomeController> {
   @override
@@ -111,51 +113,26 @@ class HomeView extends GetView<HomeController> {
             ),
             Obx(
               () => controller.appBarTab.value == 0
-                  ? HPGButtonPengeluaranWidget()
+                  ? HPGButtonPengeluaranWidget(
+                      onPressed: () {
+                        Get.toNamed(AppPages.INITIAL_TC);
+                      },
+                    )
                   : controller.appBarTab.value == 1
-                      ? Container()
+                      ? HPGButtonPengeluaranWidget(
+                          onPressed: () {
+                            Get.toNamed(AppPages.INITIAL_TC);
+                          },
+                        )
                       : controller.appBarTab.value == 2
                           ? Container()
-                          : HPGButtonPengeluaranWidget(),
+                          : HPGButtonPengeluaranWidget(
+                              onPressed: () {
+                                Get.toNamed(AppPages.INITIAL_TC);
+                              },
+                            ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class HPGButtonPengeluaranWidget extends StatelessWidget {
-  const HPGButtonPengeluaranWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: Get.height * 0.13,
-      width: Get.width,
-      padding: EdgeInsets.all(15),
-      color: MyColors.whiteGrey,
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all<OutlinedBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-          backgroundColor: MaterialStateProperty.all<Color>(
-            MyColors.darkBlueAccent,
-          ),
-        ),
-        child: Text(
-          "Buat Catatan Baru",
-          style: TextStyle(
-            fontFamily: MyFontFamily.Bold,
-            fontSize: MyStyles.H5,
-            color: MyColors.white,
-          ),
         ),
       ),
     );
