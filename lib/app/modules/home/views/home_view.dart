@@ -14,7 +14,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.white,
+      backgroundColor: MyColors.whiteGrey,
       appBar: AppBar(
         title: Text(
           "Catatan Keuangan",
@@ -109,34 +109,53 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
             ),
-            Container(
-              height: Get.height * 0.13,
-              width: Get.width,
-              padding: EdgeInsets.all(15),
-              color: MyColors.whiteGrey,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<OutlinedBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    MyColors.darkBlueAccent,
-                  ),
-                ),
-                child: Text(
-                  "Buat Catatan Baru",
-                  style: TextStyle(
-                    fontFamily: MyFontFamily.Bold,
-                    fontSize: MyStyles.H5,
-                    color: MyColors.white,
-                  ),
-                ),
-              ),
+            Obx(
+              () => controller.appBarTab.value == 0
+                  ? HPGButtonPengeluaranWidget()
+                  : controller.appBarTab.value == 1
+                      ? Container()
+                      : controller.appBarTab.value == 2
+                          ? Container()
+                          : HPGButtonPengeluaranWidget(),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class HPGButtonPengeluaranWidget extends StatelessWidget {
+  const HPGButtonPengeluaranWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: Get.height * 0.13,
+      width: Get.width,
+      padding: EdgeInsets.all(15),
+      color: MyColors.whiteGrey,
+      child: ElevatedButton(
+        onPressed: () {},
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<OutlinedBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          backgroundColor: MaterialStateProperty.all<Color>(
+            MyColors.darkBlueAccent,
+          ),
+        ),
+        child: Text(
+          "Buat Catatan Baru",
+          style: TextStyle(
+            fontFamily: MyFontFamily.Bold,
+            fontSize: MyStyles.H5,
+            color: MyColors.white,
+          ),
         ),
       ),
     );

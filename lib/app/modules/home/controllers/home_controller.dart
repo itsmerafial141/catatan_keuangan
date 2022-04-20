@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   var appBarTab = 0.obs;
+  var laporanTab = 0.obs;
+
   Size textSize(String text, TextStyle style) {
     final TextPainter textPainter = TextPainter(
         text: TextSpan(text: text, style: style),
